@@ -1,0 +1,664 @@
+{
+  "name": "Testing DataFlows",
+  "description": "",
+  "version": "1.0",
+  "culture": "en-US",
+  "modifiedTime": "2020-09-22T17:18:12.2937728-04:00",
+  "pbi:mashup": {
+    "fastCombine": false,
+    "allowNativeQueries": false,
+    "queriesMetadata": {
+      "SurveyRatingDetailsCPT": {
+        "queryId": "5a4c7b2f-4b4d-4a5e-b952-81b2f75f635b",
+        "queryName": "SurveyRatingDetailsCPT",
+        "queryGroupId": "1226851b-fddd-4e80-98a4-4b17a85d5e8c",
+        "loadEnabled": true
+      },
+      "SurveySupplierGroups": {
+        "queryId": "2fdf88d1-c388-447b-9ede-ec54e952c31d",
+        "queryName": "SurveySupplierGroups",
+        "queryGroupId": "a7dacdf1-da89-42f7-9fe1-4c4c52beae44",
+        "loadEnabled": true
+      },
+      "SurveyCategories": {
+        "queryId": "fe292087-5396-46b4-9e29-878978353a22",
+        "queryName": "SurveyCategories",
+        "queryGroupId": "a7dacdf1-da89-42f7-9fe1-4c4c52beae44",
+        "loadEnabled": true
+      },
+      "SurveyQuestionsCPT": {
+        "queryId": "d0cf8e0d-caba-47e1-b8e6-e789d88876fe",
+        "queryName": "SurveyQuestionsCPT",
+        "queryGroupId": "1226851b-fddd-4e80-98a4-4b17a85d5e8c",
+        "loadEnabled": true
+      },
+      "SurveyCategoriesCPT": {
+        "queryId": "ce8dd059-d3d7-415f-bf60-c0b729c19430",
+        "queryName": "SurveyCategoriesCPT",
+        "queryGroupId": "1226851b-fddd-4e80-98a4-4b17a85d5e8c",
+        "loadEnabled": true
+      },
+      "SurveySupplierGroupsCPT": {
+        "queryId": "d38a8bbf-c59d-49bc-a210-f5427c277c6a",
+        "queryName": "SurveySupplierGroupsCPT",
+        "queryGroupId": "1226851b-fddd-4e80-98a4-4b17a85d5e8c",
+        "loadEnabled": true
+      },
+      "SurveyQuestions": {
+        "queryId": "787d3513-4203-454c-b54f-c49e478b9fa7",
+        "queryName": "SurveyQuestions",
+        "queryGroupId": "a7dacdf1-da89-42f7-9fe1-4c4c52beae44",
+        "loadEnabled": true
+      },
+      "SurveyRatingDetails": {
+        "queryId": "5098b5e1-e9dd-4e01-bce7-0ff7035e1395",
+        "queryName": "SurveyRatingDetails",
+        "queryGroupId": "a7dacdf1-da89-42f7-9fe1-4c4c52beae44",
+        "loadEnabled": true
+      },
+      "SurveyResultsCPT": {
+        "queryId": "26e6331c-dcf7-4acf-bad6-22a52d34c261",
+        "queryName": "SurveyResultsCPT",
+        "queryGroupId": "1226851b-fddd-4e80-98a4-4b17a85d5e8c",
+        "loadEnabled": true
+      },
+      "SurveysCPT": {
+        "queryId": "a9db436a-2332-4b1f-bff6-547edcf86915",
+        "queryName": "SurveysCPT",
+        "queryGroupId": "1226851b-fddd-4e80-98a4-4b17a85d5e8c",
+        "loadEnabled": true
+      },
+      "Surveys": {
+        "queryId": "b5715c46-8a24-49af-be8a-98b57157028d",
+        "queryName": "Surveys",
+        "queryGroupId": "a7dacdf1-da89-42f7-9fe1-4c4c52beae44",
+        "loadEnabled": true
+      },
+      "SurveyResults": {
+        "queryId": "8baba4de-0dc1-4afd-8fd2-77fcf58b97bf",
+        "queryName": "SurveyResults",
+        "queryGroupId": "a7dacdf1-da89-42f7-9fe1-4c4c52beae44",
+        "loadEnabled": true
+      },
+      "RangeEnd": {
+        "queryId": "2d11108d-af6f-4b2e-8f39-0ad167a2569a",
+        "queryName": "RangeEnd"
+      },
+      "RangeStart": {
+        "queryId": "1c5ab3a0-73cc-456f-921c-34fa819a15fb",
+        "queryName": "RangeStart"
+      }
+    },
+    "document": "section Section1;\r\n\r\nshared SurveyRatingDetailsCPT = let\r\n    Source = SurveyRatingDetails\r\nin\r\n    Source;\r\n\r\nshared SurveySupplierGroups = let\r\n    Source = Sql.Database(\"DALSQLPR005.us.btswyn.com\", \"GDW\"),\r\n    #\"Filtered rows\" = Table.SelectRows(Source, each [Schema] = \"ReportingApi\"),\r\n    Navigation = #\"Filtered rows\"{[Schema = \"ReportingApi\", Item = \"SurveySupplierGroups\"]}[Data]\r\nin\r\n    Navigation;\r\n\r\nshared SurveyCategories = let\r\n    Source = Sql.Database(\"DALSQLPR005.us.btswyn.com\", \"GDW\"),\r\n    #\"Filtered rows\" = Table.SelectRows(Source, each [Schema] = \"ReportingApi\"),\r\n    Navigation = #\"Filtered rows\"{[Schema = \"ReportingApi\", Item = \"SurveyCategories\"]}[Data]\r\nin\r\n    Navigation;\r\n\r\nshared SurveyQuestionsCPT = let\r\n    Source = SurveyQuestions\r\nin\r\n    Source;\r\n\r\nshared SurveyCategoriesCPT = let\r\n    Source = SurveyCategories\r\nin\r\n    Source;\r\n\r\nshared SurveySupplierGroupsCPT = let\r\n    Source = SurveySupplierGroups\r\nin\r\n    Source;\r\n\r\nshared SurveyQuestions = let\r\n    Source = Sql.Database(\"DALSQLPR005.us.btswyn.com\", \"GDW\"),\r\n    #\"Filtered rows\" = Table.SelectRows(Source, each [Schema] = \"ReportingApi\"),\r\n    Navigation = #\"Filtered rows\"{[Schema = \"ReportingApi\", Item = \"SurveyQuestions\"]}[Data]\r\nin\r\n    Navigation;\r\n\r\nshared SurveyRatingDetails = let\r\n    Source = Sql.Database(\"DALSQLPR005.us.btswyn.com\", \"GDW\"),\r\n    #\"Filtered rows\" = Table.SelectRows(Source, each [Schema] = \"ReportingApi\"),\r\n    Navigation = #\"Filtered rows\"{[Schema = \"ReportingApi\", Item = \"SurveyRatingDetails\"]}[Data]\r\nin\r\n    Navigation;\r\n\r\nshared SurveyResultsCPT = let\r\n    Source = SurveyResults\r\nin\r\n    Source;\r\n\r\nshared SurveysCPT = let\r\n    Source = Surveys,\r\n    #\"Sorted rows\" = Table.Buffer(Table.Sort(Source, {{\"UpdateUTCDTTS\", Order.Descending}})),\r\n    #\"Removed duplicates\" = Table.Distinct(#\"Sorted rows\", {\"SurveyID\"})\r\nin\r\n    #\"Removed duplicates\";\r\n\r\nshared Surveys = let\r\n    Source = Sql.Database(\"DALSQLPR005.us.btswyn.com\", \"GDW\"),\r\n    #\"Filtered rows\" = Table.SelectRows(Source, each [Schema] = \"ReportingApi\"),\r\n    Navigation = #\"Filtered rows\"{[Schema = \"ReportingApi\", Item = \"Surveys\"]}[Data],\r\n    #\"Surveys-55706461746555544344545453-autogenerated_for_incremental_refresh\" = Table.SelectRows(Navigation, each DateTime.From([UpdateUTCDTTS]) >= RangeStart and DateTime.From([UpdateUTCDTTS]) < RangeEnd)\r\nin\r\n    #\"Surveys-55706461746555544344545453-autogenerated_for_incremental_refresh\";\r\n\r\nshared SurveyResults = let\r\n    Source = Sql.Database(\"DALSQLPR005.us.btswyn.com\", \"GDW\"),\r\n    #\"Filtered rows\" = Table.SelectRows(Source, each [Schema] = \"ReportingApi\"),\r\n    Navigation = #\"Filtered rows\"{[Schema = \"ReportingApi\", Item = \"SurveyResults\"]}[Data],\r\n    #\"SurveyResults-5570646174655554434454-autogenerated_for_incremental_refresh\" = Table.SelectRows(Navigation, each DateTime.From([UpdateUTCDT]) >= RangeStart and DateTime.From([UpdateUTCDT]) < RangeEnd)\r\nin\r\n    #\"SurveyResults-5570646174655554434454-autogenerated_for_incremental_refresh\";\r\n\r\nshared RangeStart = let RangeStart = #datetime(0001,01,01,00,00,00) meta [IsParameterQuery=true, List={}, Type=\"DateTime\", IsParameterQueryRequired=true, Description=\"autogenerated_for_incremental_refresh\"] in RangeStart;\r\n\r\nshared RangeEnd = let RangeEnd = #datetime(9999,12,31,23,59,59) meta [IsParameterQuery=true, List={}, Type=\"DateTime\", IsParameterQueryRequired=true, Description=\"autogenerated_for_incremental_refresh\"] in RangeEnd;\r\n\r\n"
+  },
+  "annotations": [
+    {
+      "name": "pbi:QueryGroups",
+      "value": "[{\"id\":\"a7dacdf1-da89-42f7-9fe1-4c4c52beae44\",\"name\":\"Parent\",\"description\":\"\",\"parentId\":null,\"order\":0},{\"id\":\"1226851b-fddd-4e80-98a4-4b17a85d5e8c\",\"name\":\"Computed\",\"description\":\"\",\"parentId\":null,\"order\":1}]"
+    }
+  ],
+  "entities": [
+    {
+      "$type": "LocalEntity",
+      "name": "SurveyRatingDetailsCPT",
+      "description": "",
+      "pbi:refreshPolicy": {
+        "$type": "FullRefreshPolicy",
+        "location": "SurveyRatingDetailsCPT.csv"
+      },
+      "annotations": [
+        {
+          "name": "pbi:EntityTypeDisplayHint",
+          "value": "CalculatedEntity"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "RatingScaleDetailID",
+          "dataType": "int64"
+        },
+        {
+          "name": "RatingScaleID",
+          "dataType": "int64"
+        },
+        {
+          "name": "RatingScaleNO",
+          "dataType": "double"
+        },
+        {
+          "name": "RatingNoDS",
+          "dataType": "string"
+        }
+      ]
+    },
+    {
+      "$type": "LocalEntity",
+      "name": "SurveySupplierGroups",
+      "description": "",
+      "pbi:refreshPolicy": {
+        "$type": "FullRefreshPolicy",
+        "location": "SurveySupplierGroups.csv"
+      },
+      "attributes": [
+        {
+          "name": "SupplierGroupCD",
+          "dataType": "string"
+        },
+        {
+          "name": "SuveySupplierRollupCD",
+          "dataType": "string"
+        },
+        {
+          "name": "SupplierGroupDS",
+          "dataType": "string"
+        }
+      ]
+    },
+    {
+      "$type": "LocalEntity",
+      "name": "SurveyCategories",
+      "description": "",
+      "pbi:refreshPolicy": {
+        "$type": "FullRefreshPolicy",
+        "location": "SurveyCategories.csv"
+      },
+      "attributes": [
+        {
+          "name": "SurveyCategoryID",
+          "dataType": "int64"
+        },
+        {
+          "name": "SurveyCategoryDS",
+          "dataType": "string"
+        }
+      ]
+    },
+    {
+      "$type": "LocalEntity",
+      "name": "SurveyQuestionsCPT",
+      "description": "",
+      "pbi:refreshPolicy": {
+        "$type": "FullRefreshPolicy",
+        "location": "SurveyQuestionsCPT.csv"
+      },
+      "annotations": [
+        {
+          "name": "pbi:EntityTypeDisplayHint",
+          "value": "CalculatedEntity"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "QuestionCD",
+          "dataType": "string"
+        },
+        {
+          "name": "CurrentQuestionTX",
+          "dataType": "string"
+        },
+        {
+          "name": "StandardTemplateIN",
+          "dataType": "boolean"
+        },
+        {
+          "name": "OverallQuestionIN",
+          "dataType": "boolean"
+        },
+        {
+          "name": "SurveySupplierGroupCD",
+          "dataType": "string"
+        }
+      ]
+    },
+    {
+      "$type": "LocalEntity",
+      "name": "SurveyCategoriesCPT",
+      "description": "",
+      "pbi:refreshPolicy": {
+        "$type": "FullRefreshPolicy",
+        "location": "SurveyCategoriesCPT.csv"
+      },
+      "annotations": [
+        {
+          "name": "pbi:EntityTypeDisplayHint",
+          "value": "CalculatedEntity"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "SurveyCategoryID",
+          "dataType": "int64"
+        },
+        {
+          "name": "SurveyCategoryDS",
+          "dataType": "string"
+        }
+      ]
+    },
+    {
+      "$type": "LocalEntity",
+      "name": "SurveySupplierGroupsCPT",
+      "description": "",
+      "pbi:refreshPolicy": {
+        "$type": "FullRefreshPolicy",
+        "location": "SurveySupplierGroupsCPT.csv"
+      },
+      "annotations": [
+        {
+          "name": "pbi:EntityTypeDisplayHint",
+          "value": "CalculatedEntity"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "SupplierGroupCD",
+          "dataType": "string"
+        },
+        {
+          "name": "SuveySupplierRollupCD",
+          "dataType": "string"
+        },
+        {
+          "name": "SupplierGroupDS",
+          "dataType": "string"
+        }
+      ]
+    },
+    {
+      "$type": "LocalEntity",
+      "name": "SurveyQuestions",
+      "description": "",
+      "pbi:refreshPolicy": {
+        "$type": "FullRefreshPolicy",
+        "location": "SurveyQuestions.csv"
+      },
+      "attributes": [
+        {
+          "name": "QuestionCD",
+          "dataType": "string"
+        },
+        {
+          "name": "CurrentQuestionTX",
+          "dataType": "string"
+        },
+        {
+          "name": "StandardTemplateIN",
+          "dataType": "boolean"
+        },
+        {
+          "name": "OverallQuestionIN",
+          "dataType": "boolean"
+        },
+        {
+          "name": "SurveySupplierGroupCD",
+          "dataType": "string"
+        }
+      ]
+    },
+    {
+      "$type": "LocalEntity",
+      "name": "SurveyRatingDetails",
+      "description": "",
+      "pbi:refreshPolicy": {
+        "$type": "FullRefreshPolicy",
+        "location": "SurveyRatingDetails.csv"
+      },
+      "attributes": [
+        {
+          "name": "RatingScaleDetailID",
+          "dataType": "int64"
+        },
+        {
+          "name": "RatingScaleID",
+          "dataType": "int64"
+        },
+        {
+          "name": "RatingScaleNO",
+          "dataType": "double"
+        },
+        {
+          "name": "RatingNoDS",
+          "dataType": "string"
+        }
+      ]
+    },
+    {
+      "$type": "LocalEntity",
+      "name": "SurveyResultsCPT",
+      "description": "",
+      "pbi:refreshPolicy": {
+        "$type": "FullRefreshPolicy",
+        "location": "SurveyResultsCPT.csv"
+      },
+      "annotations": [
+        {
+          "name": "pbi:EntityTypeDisplayHint",
+          "value": "CalculatedEntity"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "ResultID",
+          "dataType": "int64"
+        },
+        {
+          "name": "SurveyID",
+          "dataType": "int64"
+        },
+        {
+          "name": "SurveySendDT",
+          "dataType": "date"
+        },
+        {
+          "name": "SurveyReceivedDT",
+          "dataType": "date"
+        },
+        {
+          "name": "GDWClientRootID",
+          "dataType": "int64"
+        },
+        {
+          "name": "CustomerID",
+          "dataType": "int64"
+        },
+        {
+          "name": "GDWProgramID",
+          "dataType": "int64"
+        },
+        {
+          "name": "MasterQuestionID",
+          "dataType": "int64"
+        },
+        {
+          "name": "SurveySupplierGroupCD",
+          "dataType": "string"
+        },
+        {
+          "name": "QuestionCD",
+          "dataType": "string"
+        },
+        {
+          "name": "RatingScaleID",
+          "dataType": "int64"
+        },
+        {
+          "name": "SurveyCategoryID",
+          "dataType": "int64"
+        },
+        {
+          "name": "IsCommentIN",
+          "dataType": "int64"
+        },
+        {
+          "name": "ResultNO",
+          "dataType": "double"
+        },
+        {
+          "name": "ResultCommentTX",
+          "dataType": "string"
+        },
+        {
+          "name": "OverallQuestionIN",
+          "dataType": "boolean"
+        },
+        {
+          "name": "SatisfiedIN",
+          "dataType": "int64"
+        },
+        {
+          "name": "ServiceExcellenceIN",
+          "dataType": "int64"
+        },
+        {
+          "name": "UpdateUTCDT",
+          "dataType": "dateTime"
+        },
+        {
+          "name": "LegacyMasterProgramID",
+          "dataType": "string"
+        },
+        {
+          "name": "NAResultIN",
+          "dataType": "int64"
+        }
+      ]
+    },
+    {
+      "$type": "LocalEntity",
+      "name": "SurveysCPT",
+      "description": "",
+      "pbi:refreshPolicy": {
+        "$type": "FullRefreshPolicy",
+        "location": "SurveysCPT.csv"
+      },
+      "annotations": [
+        {
+          "name": "pbi:EntityTypeDisplayHint",
+          "value": "CalculatedEntity"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "SurveyID",
+          "dataType": "int64"
+        },
+        {
+          "name": "CustomerID",
+          "dataType": "int64"
+        },
+        {
+          "name": "GDWClientRootId",
+          "dataType": "int64"
+        },
+        {
+          "name": "GDWProgramID",
+          "dataType": "int64"
+        },
+        {
+          "name": "SurveyCategoryID",
+          "dataType": "int64"
+        },
+        {
+          "name": "SurveySendDT",
+          "dataType": "date"
+        },
+        {
+          "name": "SurveyReceivedDT",
+          "dataType": "date"
+        },
+        {
+          "name": "SurveyFileManagerNM",
+          "dataType": "string"
+        },
+        {
+          "name": "SurveyReceivedIN",
+          "dataType": "int64"
+        },
+        {
+          "name": "UpdateUTCDTTS",
+          "dataType": "dateTime"
+        },
+        {
+          "name": "LegacyMasterProgramID",
+          "dataType": "string"
+        }
+      ]
+    },
+    {
+      "$type": "LocalEntity",
+      "name": "Surveys",
+      "description": "",
+      "pbi:refreshPolicy": {
+        "$type": "IncrementalRefreshPolicy",
+        "locationPattern": "Surveys/part.csv",
+        "rollingWindowGranularity": "year",
+        "rollingWindowPeriods": 40,
+        "incrementalGranularity": "day",
+        "incrementalPeriods": 1
+      },
+      "annotations": [
+        {
+          "name": "pbi:IncrementalRefreshDetectChangeAttribute"
+        },
+        {
+          "name": "pbi:IncrementalRefreshFilterByAttribute",
+          "value": "UpdateUTCDTTS"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "SurveyID",
+          "dataType": "int64"
+        },
+        {
+          "name": "CustomerID",
+          "dataType": "int64"
+        },
+        {
+          "name": "GDWClientRootId",
+          "dataType": "int64"
+        },
+        {
+          "name": "GDWProgramID",
+          "dataType": "int64"
+        },
+        {
+          "name": "SurveyCategoryID",
+          "dataType": "int64"
+        },
+        {
+          "name": "SurveySendDT",
+          "dataType": "date"
+        },
+        {
+          "name": "SurveyReceivedDT",
+          "dataType": "date"
+        },
+        {
+          "name": "SurveyFileManagerNM",
+          "dataType": "string"
+        },
+        {
+          "name": "SurveyReceivedIN",
+          "dataType": "int64"
+        },
+        {
+          "name": "UpdateUTCDTTS",
+          "dataType": "dateTime"
+        },
+        {
+          "name": "LegacyMasterProgramID",
+          "dataType": "string"
+        }
+      ]
+    },
+    {
+      "$type": "LocalEntity",
+      "name": "SurveyResults",
+      "description": "",
+      "pbi:refreshPolicy": {
+        "$type": "IncrementalRefreshPolicy",
+        "locationPattern": "SurveyResults/part.csv",
+        "rollingWindowGranularity": "year",
+        "rollingWindowPeriods": 40,
+        "incrementalGranularity": "day",
+        "incrementalPeriods": 1
+      },
+      "annotations": [
+        {
+          "name": "pbi:IncrementalRefreshDetectChangeAttribute"
+        },
+        {
+          "name": "pbi:IncrementalRefreshFilterByAttribute",
+          "value": "UpdateUTCDT"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "ResultID",
+          "dataType": "int64"
+        },
+        {
+          "name": "SurveyID",
+          "dataType": "int64"
+        },
+        {
+          "name": "SurveySendDT",
+          "dataType": "date"
+        },
+        {
+          "name": "SurveyReceivedDT",
+          "dataType": "date"
+        },
+        {
+          "name": "GDWClientRootID",
+          "dataType": "int64"
+        },
+        {
+          "name": "CustomerID",
+          "dataType": "int64"
+        },
+        {
+          "name": "GDWProgramID",
+          "dataType": "int64"
+        },
+        {
+          "name": "MasterQuestionID",
+          "dataType": "int64"
+        },
+        {
+          "name": "SurveySupplierGroupCD",
+          "dataType": "string"
+        },
+        {
+          "name": "QuestionCD",
+          "dataType": "string"
+        },
+        {
+          "name": "RatingScaleID",
+          "dataType": "int64"
+        },
+        {
+          "name": "SurveyCategoryID",
+          "dataType": "int64"
+        },
+        {
+          "name": "IsCommentIN",
+          "dataType": "int64"
+        },
+        {
+          "name": "ResultNO",
+          "dataType": "double"
+        },
+        {
+          "name": "ResultCommentTX",
+          "dataType": "string"
+        },
+        {
+          "name": "OverallQuestionIN",
+          "dataType": "boolean"
+        },
+        {
+          "name": "SatisfiedIN",
+          "dataType": "int64"
+        },
+        {
+          "name": "ServiceExcellenceIN",
+          "dataType": "int64"
+        },
+        {
+          "name": "UpdateUTCDT",
+          "dataType": "dateTime"
+        },
+        {
+          "name": "LegacyMasterProgramID",
+          "dataType": "string"
+        },
+        {
+          "name": "NAResultIN",
+          "dataType": "int64"
+        }
+      ]
+    }
+  ]
+}
